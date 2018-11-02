@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Nerds</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <!--  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />-->
+</head>
+
+<body>
+  <style>
+    form {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+  </style>
+
+  <form action="#echo.ru" method="post">
+    <input name="price_from" id="amount_before" size="24" type="text">
+    <input name="price_to" size="24" id="amount_after" type="text">
+
+    <div id="slider-range" style="margin-top:10px; width:400px;"></div>
+
+    <!-- Образующаяся структура
+    <div id="slider-range" style="margin-top:10px; width:400px;" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+     
+      <div class="ui-slider-range ui-widget-header" style="left: 10%; width: 70%;"></div>
+      
+      <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 10%;"></a>
+      
+      <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a>
+      
+      </div>
+    
+-->
+  </form>
+
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  <script>
+    $("#slider-range").slider({
+      range: true,
+      min: 0,
+      max: 100000,
+      step: 20,
+      values: [0, 80000],
+      slide: function(event, ui) {
+        $("#amount_before").val(ui.values[0]);
+        $("#amount_after").val(ui.values[1])
+      }
+    });
+
+    $('#amount_before').val($("#slider-range").slider("values", 0))
+    $('#amount_after').val($("#slider-range").slider("values", 1))
+
+    $('#amount_before').change(function() {
+      $("#slider-range").slider('values', 0, $(this).val());
+    });
+
+    $('#amount_after').change(function() {
+      $("#slider-range").slider('values', 1, $(this).val());
+    });
+
+  </script>
+</body>
+
+</html>
